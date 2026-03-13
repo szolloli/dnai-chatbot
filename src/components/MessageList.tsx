@@ -3,7 +3,7 @@ import { Box, Paper, Typography } from "@mui/material";
 
 import { useChatStore } from "../store/chatStore";
 
-export default function MessageList() {
+const MessageList = () => {
   const messages = useChatStore((state) => state.messages);
   const listRef = useRef<HTMLDivElement | null>(null);
 
@@ -70,4 +70,6 @@ export default function MessageList() {
       )}
     </Box>
   );
-}
+};
+
+export default MessageList;

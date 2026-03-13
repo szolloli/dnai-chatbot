@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 
 import ChatWidget from "./components/ChatWidget";
 
-function App() {
+const App = () => {
   return (
     <Box
       sx={{
@@ -15,6 +15,6 @@ function App() {
       <ChatWidget />
     </Box>
   );
-}
+};
 
 export default App;

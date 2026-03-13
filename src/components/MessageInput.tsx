@@ -2,7 +2,7 @@ import { useState, type KeyboardEvent, type SubmitEvent } from "react";
 import { Box, Button, TextField } from "@mui/material";
 import { useChatStore } from "../store/chatStore";
 
-export default function MessageInput() {
+const MessageInput = () => {
   const addUserMessage = useChatStore((state) => state.addUserMessage);
   const [text, setText] = useState("");
 
@@ -51,4 +51,6 @@ export default function MessageInput() {
       </Button>
     </Box>
   );
-}
+};
+
+export default MessageInput;

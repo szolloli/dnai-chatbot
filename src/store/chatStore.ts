@@ -1,29 +1,32 @@
 import { create } from "zustand";
 import { v4 as uuid } from "uuid";
 
-import type { Message, MessageSender } from "../types/chat";
+import type { Message } from "../types/chat";
 
-type ChatStore = {
+type MessagePayload = Pick<Message, "sender" | "text">;
+type MessageTextPayload = Pick<Message, "text">;
+
+export type ChatStore = {
   messages: Message[];
-  addMessage: (message: { sender: MessageSender; text: string }) => void;
-  addUserMessage: (message: { text: string }) => void;
-  addBotMessage: (message: { text: string }) => void;
+  addMessage: (message: MessagePayload) => void;
+  addUserMessage: (message: MessageTextPayload) => void;
+  addBotMessage: (message: MessageTextPayload) => void;
   clearMessages: () => void;
 };
+
+const createMessage = ({ sender, text }: MessagePayload): Message => ({
+  id: uuid(),
+  sender,
+  text,
+  timestamp: Date.now(),
+});
 
 export const useChatStore = create<ChatStore>((set, get) => ({
   messages: [],
 
   addMessage: (message) =>
     set((state) => ({
-      messages: [
-        ...state.messages,
-        {
-          id: uuid(),
-          timestamp: Date.now(),
-          ...message,
-        },
-      ],
+      messages: [...state.messages, createMessage(message)],
     })),
 
   addUserMessage: (message) => {

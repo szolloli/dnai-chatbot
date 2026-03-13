@@ -6,7 +6,7 @@ import { useChatStore } from "../store/chatStore";
 import MessageInput from "./MessageInput";
 import MessageList from "./MessageList";
 
-export default function ChatWidget() {
+const ChatWidget = () => {
   const addBotMessage = useChatStore((state) => state.addBotMessage);
 
   useEffect(() => {
@@ -44,4 +44,6 @@ export default function ChatWidget() {
       <MessageInput />
     </Box>
   );
-}
+};
+
+export default ChatWidget;
