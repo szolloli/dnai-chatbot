@@ -56,8 +56,10 @@ const MessageInput = () => {
         sx={{
           width: 36,
           height: 36,
+          minWidth: 36,
           borderRadius: "50%",
           p: 0,
+          flex: "0 0 36px",
         }}
       >
         <SvgIcon fontSize="small" viewBox="0 0 24 24">
