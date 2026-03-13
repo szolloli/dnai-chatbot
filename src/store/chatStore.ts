@@ -21,8 +21,12 @@ const createMessage = ({ sender, text }: MessagePayload): Message => ({
   timestamp: Date.now(),
 });
 
+const createInitialMessages = (): Message[] => [
+  createMessage({ sender: "bot", text: "Hello how can I help you today?" }),
+];
+
 export const useChatStore = create<ChatStore>((set, get) => ({
-  messages: [],
+  messages: createInitialMessages(),
 
   addMessage: (message) =>
     set((state) => ({
@@ -37,5 +41,5 @@ export const useChatStore = create<ChatStore>((set, get) => ({
     get().addMessage({ sender: "bot", text: message.text });
   },
 
-  clearMessages: () => set({ messages: [] }),
+  clearMessages: () => set({ messages: createInitialMessages() }),
 }));

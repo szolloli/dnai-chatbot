@@ -102,128 +102,118 @@ const MessageList = () => {
         gap: 1.25,
       }}
     >
-      {senderBlocks.length === 0 ? (
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{ fontSize: 13 }}
-        >
-          No messages yet.
-        </Typography>
-      ) : (
-        senderBlocks.map((block, blockIndex) =>
-          block.sender === "bot" ? (
-            <Box
-              key={`bot-${blockIndex}-${block.messages[0].id}`}
+      {senderBlocks.map((block, blockIndex) =>
+        block.sender === "bot" ? (
+          <Box
+            key={`bot-${blockIndex}-${block.messages[0].id}`}
+            sx={{
+              alignSelf: "flex-start",
+              maxWidth: "92%",
+              display: "flex",
+              gap: 1,
+              alignItems: "flex-end",
+            }}
+          >
+            <Avatar
+              src="https://i.pravatar.cc/40?img=13"
+              alt="Assistant"
               sx={{
-                alignSelf: "flex-start",
-                maxWidth: "92%",
+                width: SINGLE_MESSAGE_HEIGHT,
+                height: SINGLE_MESSAGE_HEIGHT,
+                flexShrink: 0,
+              }}
+            />
+            <Box
+              sx={{
                 display: "flex",
-                gap: 1,
-                alignItems: "flex-end",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                gap: 0.5,
               }}
             >
-              <Avatar
-                src="https://i.pravatar.cc/40?img=13"
-                alt="Assistant"
-                sx={{
-                  width: SINGLE_MESSAGE_HEIGHT,
-                  height: SINGLE_MESSAGE_HEIGHT,
-                  flexShrink: 0,
-                }}
-              />
               <Box
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "flex-start",
-                  gap: 0.5,
+                  alignItems: "flex-start",
+                  gap: 0.375,
                 }}
               >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    gap: 0.375,
-                  }}
-                >
-                  {block.messages.map((message, messageIndex) => (
-                    <Paper
-                      key={message.id}
-                      elevation={0}
-                      sx={{
-                        width: "fit-content",
-                        maxWidth: "100%",
-                        px: 1.5,
-                        py: 1,
-                        minHeight: SINGLE_MESSAGE_HEIGHT,
-                        boxSizing: "border-box",
-                        display: "flex",
-                        alignItems: "center",
-                        borderRadius: getBubbleBorderRadius(
-                          "bot",
-                          messageIndex,
-                          block.messages.length,
-                        ),
-                        bgcolor: "chat.botBubble",
-                        color: "chat.botText",
-                      }}
+                {block.messages.map((message, messageIndex) => (
+                  <Paper
+                    key={message.id}
+                    elevation={0}
+                    sx={{
+                      width: "fit-content",
+                      maxWidth: "100%",
+                      px: 1.5,
+                      py: 1,
+                      minHeight: SINGLE_MESSAGE_HEIGHT,
+                      boxSizing: "border-box",
+                      display: "flex",
+                      alignItems: "center",
+                      borderRadius: getBubbleBorderRadius(
+                        "bot",
+                        messageIndex,
+                        block.messages.length,
+                      ),
+                      bgcolor: "chat.botBubble",
+                      color: "chat.botText",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{ fontSize: 13, lineHeight: 1.35 }}
                     >
-                      <Typography
-                        variant="body2"
-                        sx={{ fontSize: 13, lineHeight: 1.35 }}
-                      >
-                        {message.text}
-                      </Typography>
-                    </Paper>
-                  ))}
-                </Box>
+                      {message.text}
+                    </Typography>
+                  </Paper>
+                ))}
               </Box>
             </Box>
-          ) : (
-            <Box
-              key={`user-${blockIndex}-${block.messages[0].id}`}
-              sx={{
-                alignSelf: "flex-end",
-                maxWidth: "85%",
-                display: "flex",
-                flexDirection: "column",
-                gap: 0.375,
-              }}
-            >
-              {block.messages.map((message, messageIndex) => (
-                <Paper
-                  key={message.id}
-                  elevation={0}
-                  sx={{
-                    alignSelf: "flex-end",
-                    px: 1.25,
-                    py: 0.75,
-                    minHeight: SINGLE_MESSAGE_HEIGHT,
-                    boxSizing: "border-box",
-                    display: "flex",
-                    alignItems: "center",
-                    borderRadius: getBubbleBorderRadius(
-                      "user",
-                      messageIndex,
-                      block.messages.length,
-                    ),
-                    bgcolor: "chat.userBubble",
-                    color: "chat.userText",
-                  }}
+          </Box>
+        ) : (
+          <Box
+            key={`user-${blockIndex}-${block.messages[0].id}`}
+            sx={{
+              alignSelf: "flex-end",
+              maxWidth: "85%",
+              display: "flex",
+              flexDirection: "column",
+              gap: 0.375,
+            }}
+          >
+            {block.messages.map((message, messageIndex) => (
+              <Paper
+                key={message.id}
+                elevation={0}
+                sx={{
+                  alignSelf: "flex-end",
+                  px: 1.25,
+                  py: 0.75,
+                  minHeight: SINGLE_MESSAGE_HEIGHT,
+                  boxSizing: "border-box",
+                  display: "flex",
+                  alignItems: "center",
+                  borderRadius: getBubbleBorderRadius(
+                    "user",
+                    messageIndex,
+                    block.messages.length,
+                  ),
+                  bgcolor: "chat.userBubble",
+                  color: "chat.userText",
+                }}
+              >
+                <Typography
+                  variant="body2"
+                  sx={{ fontSize: 13, lineHeight: 1.35 }}
                 >
-                  <Typography
-                    variant="body2"
-                    sx={{ fontSize: 13, lineHeight: 1.35 }}
-                  >
-                    {message.text}
-                  </Typography>
-                </Paper>
-              ))}
-            </Box>
-          ),
-        )
+                  {message.text}
+                </Typography>
+              </Paper>
+            ))}
+          </Box>
+        ),
       )}
     </Box>
   );
