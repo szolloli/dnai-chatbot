@@ -16,6 +16,7 @@ const ChatLauncher = () => {
     [messages],
   );
 
+  // Setup 5 second interval to "send" bot messages after user has sent a message.
   useEffect(() => {
     if (!hasUserMessage) return;
 
@@ -29,6 +30,7 @@ const ChatLauncher = () => {
       }
     }, 5000);
 
+    // Clean up interval on component unmount.
     return () => window.clearInterval(intervalId);
   }, [addBotMessage, hasUserMessage, isChatOpen]);
 
