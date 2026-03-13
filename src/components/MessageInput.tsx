@@ -1,5 +1,5 @@
 import { useState, type KeyboardEvent, type SubmitEvent } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, SvgIcon, TextField } from "@mui/material";
 import { useChatStore } from "../store/chatStore";
 
 const MessageInput = () => {
@@ -35,19 +35,34 @@ const MessageInput = () => {
       <TextField
         fullWidth
         size="small"
-        placeholder="Type a message..."
+        placeholder="Reply..."
         value={text}
         onChange={(event) => setText(event.target.value)}
         onKeyDown={handleKeyDown}
         multiline
+        maxRows={2}
+        sx={{
+          "& .MuiInputBase-input": {
+            fontSize: 13,
+            lineHeight: 1.35,
+          },
+        }}
       />
       <Button
         type="submit"
         variant="contained"
         disabled={!text.trim()}
-        sx={{ minWidth: 72 }}
+        aria-label="Send message"
+        sx={{
+          width: 36,
+          height: 36,
+          borderRadius: "50%",
+          p: 0,
+        }}
       >
-        Send
+        <SvgIcon fontSize="small" viewBox="0 0 24 24">
+          <path d="M3 20V4l19 8-19 8Zm2-3 11.85-5L5 7v3.85L10 12l-5 1.15V17Z" />
+        </SvgIcon>
       </Button>
     </Box>
   );
