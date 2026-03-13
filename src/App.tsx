@@ -1,20 +1,7 @@
-import { Box } from "@mui/material";
-
-import ChatWidget from "./components/ChatWidget";
+import ChatLauncher from "./components/ChatLauncher";
 
 const App = () => {
-  return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        display: "grid",
-        placeItems: "center",
-        p: 2,
-      }}
-    >
-      <ChatWidget />
-    </Box>
-  );
+  return <ChatLauncher />;
 };
 
 export default App;
