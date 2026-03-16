@@ -3,10 +3,11 @@ import MessageInput from "./MessageInput";
 import MessageList from "./MessageList";
 
 type ChatWidgetProps = {
+  isBotThinking: boolean;
   onClose: () => void;
 };
 
-const ChatWidget = ({ onClose }: ChatWidgetProps) => {
+const ChatWidget = ({ isBotThinking, onClose }: ChatWidgetProps) => {
   return (
     <Box
       sx={{
@@ -46,7 +47,7 @@ const ChatWidget = ({ onClose }: ChatWidgetProps) => {
           </SvgIcon>
         </IconButton>
       </Box>
-      <MessageList />
+      <MessageList isBotThinking={isBotThinking} />
       <Box
         sx={{
           borderTop: "1px solid",
@@ -55,7 +56,7 @@ const ChatWidget = ({ onClose }: ChatWidgetProps) => {
           py: 1.25,
         }}
       >
-        <MessageInput />
+        <MessageInput disabled={isBotThinking} />
       </Box>
     </Box>
   );

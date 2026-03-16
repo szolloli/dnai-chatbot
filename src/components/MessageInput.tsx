@@ -2,11 +2,16 @@ import { useState, type KeyboardEvent, type SubmitEvent } from "react";
 import { Box, Button, SvgIcon, TextField } from "@mui/material";
 import { useChatStore } from "../store/chatStore";
 
-const MessageInput = () => {
+type MessageInputProps = {
+  disabled?: boolean;
+};
+
+const MessageInput = ({ disabled = false }: MessageInputProps) => {
   const addUserMessage = useChatStore((state) => state.addUserMessage);
   const [text, setText] = useState("");
 
   const handleSend = () => {
+    if (disabled) return;
     const message = text.trim();
     if (!message) return;
     addUserMessage({ text: message });
@@ -33,6 +38,7 @@ const MessageInput = () => {
       sx={{ display: "flex", gap: 1 }}
     >
       <TextField
+        disabled={disabled}
         fullWidth
         size="small"
         placeholder="Reply..."
@@ -51,7 +57,7 @@ const MessageInput = () => {
       <Button
         type="submit"
         variant="contained"
-        disabled={!text.trim()}
+        disabled={disabled || !text.trim()}
         aria-label="Send message"
         sx={{
           width: 36,
